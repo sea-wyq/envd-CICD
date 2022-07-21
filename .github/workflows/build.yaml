@@ -20,4 +20,4 @@ jobs:
           pip3 install --pre --upgrade envd -i https://mirrors.sjtug.sjtu.edu.cn/pypi/web/simple
           envd bootstrap
       - name: Build and push
-        run: envd build --output type=image,name=${{ github.repository }},push=true
+        run: envd build --output type=image,name=mmocr-envd,push=true
