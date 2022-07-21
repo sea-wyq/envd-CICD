@@ -1,5 +1,5 @@
 def build():
-    mirror_config()
+    # mirror_config()
     base(language="python", image="public.ecr.aws/iflytek-open/aiges-gpu:10.1-1.17-3.9.13-ubuntu1804-v1.3.2")   #加载基础镜像
     install.python_packages(name = [      # 基础镜像需要提供pip
         "torch==1.10",
