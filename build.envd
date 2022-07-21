@@ -1,0 +1,26 @@
+def build():
+    mirror_config()
+    base(language="python", image="public.ecr.aws/iflytek-open/aiges-gpu:10.1-1.17-3.9.13-ubuntu1804-v1.3.2")   #加载基础镜像
+    install.python_packages(name = [      # 基础镜像需要提供pip
+        "torch==1.10",
+        "torchvision",
+        "openmim",
+    ])
+    install.python_packages(requirements="build.txt")    # 可以指定路径下进行requirments.txt安装
+    install.system_packages(name = [
+        "libgl1-mesa-glx"                 
+    ])
+    run(commands=[
+    "mim install mmcv-full",            # 通过第三方工具来进行安装
+    "mim install mmdet==2.24.0",
+    ])
+
+
+def mirror_config():
+    config.apt_source(source="""
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse
+    deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-security main restricted universe multiverse
+    """)
+    config.pip_index(url = "https://pypi.tuna.tsinghua.edu.cn/simple")
