@@ -8,6 +8,7 @@ on:
 env:
   REGISTRY: seawyq
   IMAGE_NAME: aiges_gpu
+  TAG: 001
 
 jobs:
   login:
@@ -24,4 +25,4 @@ jobs:
           pip3 install --pre --upgrade envd -i https://mirrors.sjtug.sjtu.edu.cn/pypi/web/simple
           envd bootstrap
       - name: Build and push
-        run: envd build --output type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:001,push=true
+        run: envd build --output type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }},push=true
